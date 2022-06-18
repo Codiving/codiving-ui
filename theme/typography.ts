@@ -97,3 +97,4 @@ const typography: Typography = {
 };
 
 export { typography };
+export type { Typography };
