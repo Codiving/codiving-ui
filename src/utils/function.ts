@@ -9,8 +9,14 @@ export const getPadding = (
   pl: Padding,
   pr: Padding,
   pt: Padding,
-  pb: Padding
+  pb: Padding,
+  padding: Padding
 ) => {
+  if (padding)
+    return {
+      padding: padding
+    };
+
   const result = {
     paddingLeft: pl ? pl : p,
     paddingRight: pr ? pr : p,
@@ -26,8 +32,14 @@ export const getMargin = (
   ml: Margin,
   mr: Margin,
   mt: Margin,
-  mb: Margin
+  mb: Margin,
+  margin: Margin
 ) => {
+  if (margin)
+    return {
+      margin: margin
+    };
+
   const result = {
     marginLeft: ml ? ml : m,
     marginRight: mr ? mr : m,
