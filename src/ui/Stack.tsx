@@ -42,6 +42,8 @@ const Stack = styled(Box, {
     "alignItems",
     "flexWrap",
     "spacing",
+    "width",
+    "height",
     "maxWidth"
   ])
 })<StackProps>(

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { memo } from "react";
 import { Component, Variant } from "../theme/typography";
+import { shouldForwardProp } from "../utils/emotion";
 
 interface TypographyProps extends ContainerProps {
   className?: string;
@@ -15,7 +16,9 @@ interface ContainerProps {
   cursor?: React.CSSProperties["cursor"];
 }
 
-const Container = styled("span")<ContainerProps>(
+const Container = styled("span", {
+  shouldForwardProp: shouldForwardProp(["variant", "fontSize", "cursor"])
+})<ContainerProps>(
   ({ theme, variant = "body1", fontSize: _fontSize, cursor }) => {
     const baseStyle = theme.typography[variant];
     // fontSize props로 넘어온 경우 교체
