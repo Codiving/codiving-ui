@@ -5,7 +5,7 @@ import { Component, typography, Variant } from "../theme/typography";
 interface TypographyProps {
   className?: string;
   children?: React.ReactNode;
-  variant: Variant;
+  variant?: Variant;
   component?: Component;
 }
 
@@ -14,17 +14,18 @@ interface ContainerProps {
 }
 
 const Container = styled("span")<ContainerProps>(({ variant: _variant }) => {
-  const variant = typography[_variant];
+  const variant = _variant ? typography[_variant] : {};
+
   return {
     ...variant
   };
 });
 
 const Typography = (props: TypographyProps) => {
-  const { children, component, ...rest } = props;
+  const { children, component, variant = "body1" } = props;
 
   return (
-    <Container as={component} {...rest}>
+    <Container as={component} variant={variant}>
       {children}
     </Container>
   );
