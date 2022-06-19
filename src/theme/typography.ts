@@ -13,6 +13,18 @@ type Variant =
   | "caption"
   | "overline";
 
+type Component =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "p"
+  | "span"
+  | "caption"
+  | "button";
+
 interface Font {
   fontSize: React.CSSProperties["fontSize"];
   fontWeight: React.CSSProperties["fontWeight"];
@@ -97,4 +109,4 @@ const typography: Typography = {
 };
 
 export { typography };
-export type { Typography };
+export type { Typography, Variant, Component };
