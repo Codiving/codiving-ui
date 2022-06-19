@@ -13,27 +13,49 @@ const Box = styled("div", {
     "pr",
     "pt",
     "pb",
+    "padding",
     "m",
     "ml",
     "mr",
     "mt",
     "mb",
+    "margin",
     "b",
     "bl",
     "br",
     "bt",
     "bb"
   ])
-})<BoxProps>(({ p, pl, pr, pt, pb, m, ml, mr, mt, mb, b, bl, br, bt, bb }) => {
-  const padding = getPadding(p, pl, pr, pt, pb);
-  const margin = getMargin(m, ml, mr, mt, mb);
-  const border = getBorder(b, bl, br, bt, bb);
+})<BoxProps>(
+  ({
+    p,
+    pl,
+    pr,
+    pt,
+    pb,
+    padding: _padding,
+    m,
+    ml,
+    mr,
+    mt,
+    mb,
+    margin: _margin,
+    b,
+    bl,
+    br,
+    bt,
+    bb
+  }) => {
+    const padding = getPadding(p, pl, pr, pt, pb, _padding);
+    const margin = getMargin(m, ml, mr, mt, mb, _margin);
+    const border = getBorder(b, bl, br, bt, bb);
 
-  return {
-    ...padding,
-    ...margin,
-    ...border
-  };
-});
+    return {
+      ...padding,
+      ...margin,
+      ...border
+    };
+  }
+);
 
 export default memo(Box);
