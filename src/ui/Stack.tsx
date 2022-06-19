@@ -15,6 +15,8 @@ interface StackProps {
   width?: React.CSSProperties["width"];
   height?: React.CSSProperties["height"];
   maxWidth?: React.CSSProperties["maxWidth"];
+  background?: React.CSSProperties["background"];
+  backgroundColor?: React.CSSProperties["backgroundColor"];
 }
 
 const getSpacing = (
@@ -42,9 +44,9 @@ const Stack = styled(Box, {
     "alignItems",
     "flexWrap",
     "spacing",
-    "width",
-    "height",
-    "maxWidth"
+    "maxWidth",
+    "background",
+    "backgroundColor"
   ])
 })<StackProps>(
   ({
@@ -56,7 +58,9 @@ const Stack = styled(Box, {
     spacing,
     width,
     height,
-    maxWidth
+    maxWidth,
+    background,
+    backgroundColor
   }) => ({
     display,
     flexDirection,
@@ -66,6 +70,8 @@ const Stack = styled(Box, {
     width,
     height,
     maxWidth,
+    background,
+    backgroundColor,
     ...getSpacing(spacing, flexDirection)
   })
 );
