@@ -6,8 +6,8 @@ import Box from "./Box";
 
 interface StackProps {
   children?: React.ReactNode;
-  display: "flex" | "inline-flex";
-  flexDirection: React.CSSProperties["flexDirection"];
+  display?: "flex" | "inline-flex";
+  flexDirection?: React.CSSProperties["flexDirection"];
   justifyContent?: React.CSSProperties["justifyContent"];
   alignItems?: React.CSSProperties["alignItems"];
   flexWrap?: React.CSSProperties["flexWrap"];
