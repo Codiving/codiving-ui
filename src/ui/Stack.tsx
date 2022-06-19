@@ -14,6 +14,7 @@ interface StackProps {
   spacing?: UIType.Spacing;
   width?: React.CSSProperties["width"];
   height?: React.CSSProperties["height"];
+  maxWidth?: React.CSSProperties["maxWidth"];
 }
 
 const getSpacing = (
@@ -40,7 +41,8 @@ const Stack = styled(Box, {
     "justifyContent",
     "alignItems",
     "flexWrap",
-    "spacing"
+    "spacing",
+    "maxWidth"
   ])
 })<StackProps>(
   ({
@@ -51,7 +53,8 @@ const Stack = styled(Box, {
     flexWrap,
     spacing,
     width,
-    height
+    height,
+    maxWidth
   }) => ({
     display,
     flexDirection,
@@ -60,6 +63,7 @@ const Stack = styled(Box, {
     flexWrap,
     width,
     height,
+    maxWidth,
     ...getSpacing(spacing, flexDirection)
   })
 );
