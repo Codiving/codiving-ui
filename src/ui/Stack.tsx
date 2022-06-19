@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { memo } from "react";
-import { UIType } from "src/utils/common";
-import { shouldForwardProp } from "src/utils/emotion";
+import { UIType } from "../utils/common";
+import { shouldForwardProp } from "../utils/emotion";
 import Box from "./Box";
 
 interface StackProps {

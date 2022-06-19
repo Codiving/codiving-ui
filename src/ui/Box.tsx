@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { memo } from "react";
-import { UIProps } from "src/utils/common";
-import { shouldForwardProp } from "src/utils/emotion";
-import { getBorder, getMargin, getPadding } from "src/utils/function";
+import { UIProps } from "../utils/common";
+import { shouldForwardProp } from "../utils/emotion";
+import { getBorder, getMargin, getPadding } from "../utils/function";
 
 interface BoxProps extends UIProps {}
 
