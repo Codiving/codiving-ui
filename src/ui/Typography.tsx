@@ -2,25 +2,29 @@ import styled from "@emotion/styled";
 import { memo } from "react";
 import { Component, Variant } from "../theme/typography";
 
-interface TypographyProps {
+interface TypographyProps extends ContainerProps {
   className?: string;
   children?: React.ReactNode;
-  variant?: Variant;
   component?: Component;
-  fontSize?: React.CSSProperties["fontSize"];
 }
 
-type ContainerProps = Pick<TypographyProps, "variant" | "fontSize">;
+interface ContainerProps {
+  // } extends React.ComponentProps<"span"> {
+  variant?: Variant;
+  fontSize?: React.CSSProperties["fontSize"];
+  cursor?: React.CSSProperties["cursor"];
+}
 
 const Container = styled("span")<ContainerProps>(
-  ({ theme, variant = "body1", fontSize: _fontSize }) => {
+  ({ theme, variant = "body1", fontSize: _fontSize, cursor }) => {
     const baseStyle = theme.typography[variant];
     // fontSize props로 넘어온 경우 교체
     const fontSize = _fontSize ? _fontSize : baseStyle.fontSize;
 
     return {
       ...baseStyle,
-      fontSize
+      fontSize,
+      cursor
     };
   }
 );
