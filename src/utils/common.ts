@@ -6,8 +6,8 @@ export const SPACING_PX = 8;
 
 export namespace UIType {
   export type Padding = React.CSSProperties["padding"];
-  export type Margin = React.CSSProperties["border"];
-  export type Border = React.CSSProperties["padding"];
+  export type Margin = React.CSSProperties["margin"];
+  export type Border = React.CSSProperties["border"];
   export type Spacing = typeof SPACING[number];
 }
 
@@ -17,6 +17,7 @@ interface Padding {
   pr?: UIType.Padding;
   pt?: UIType.Padding;
   pb?: UIType.Padding;
+  padding?: UIType.Padding;
 }
 
 interface Margin {
@@ -25,6 +26,7 @@ interface Margin {
   mr?: UIType.Margin;
   mt?: UIType.Margin;
   mb?: UIType.Margin;
+  margin?: UIType.Margin;
 }
 
 interface Border {
