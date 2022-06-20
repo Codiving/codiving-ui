@@ -5,6 +5,7 @@ import { shouldForwardProp } from "../utils/emotion";
 import Box from "./Box";
 
 interface StackProps {
+  cssLabel?: string;
   children?: React.ReactNode;
   display?: "flex" | "inline-flex";
   flexDirection?: React.CSSProperties["flexDirection"];
@@ -46,7 +47,8 @@ const Stack = styled(Box, {
     "spacing",
     "maxWidth",
     "background",
-    "backgroundColor"
+    "backgroundColor",
+    "cssLabel"
   ])
 })<StackProps>(
   ({
@@ -60,7 +62,8 @@ const Stack = styled(Box, {
     height,
     maxWidth,
     background,
-    backgroundColor
+    backgroundColor,
+    cssLabel
   }) => ({
     display,
     flexDirection,
@@ -72,7 +75,8 @@ const Stack = styled(Box, {
     maxWidth,
     background,
     backgroundColor,
-    ...getSpacing(spacing, flexDirection)
+    ...getSpacing(spacing, flexDirection),
+    cssLabel
   })
 );
 

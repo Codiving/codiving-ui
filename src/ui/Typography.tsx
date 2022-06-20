@@ -11,15 +11,22 @@ interface TypographyProps extends ContainerProps {
 
 interface ContainerProps {
   // } extends React.ComponentProps<"span"> {
+  cssLabel?: string;
   variant?: Variant;
   fontSize?: React.CSSProperties["fontSize"];
   cursor?: React.CSSProperties["cursor"];
 }
 
 const Container = styled("span", {
-  shouldForwardProp: shouldForwardProp(["variant", "fontSize", "cursor"])
+  shouldForwardProp: shouldForwardProp([
+    "variant",
+    "fontSize",
+    "cursor",
+    "cssLabel",
+    "as"
+  ])
 })<ContainerProps>(
-  ({ theme, variant = "body1", fontSize: _fontSize, cursor }) => {
+  ({ theme, variant = "body1", fontSize: _fontSize, cursor, cssLabel }) => {
     const baseStyle = theme.typography[variant];
     // fontSize props로 넘어온 경우 교체
     const fontSize = _fontSize ? _fontSize : baseStyle.fontSize;
@@ -27,7 +34,8 @@ const Container = styled("span", {
     return {
       ...baseStyle,
       fontSize,
-      cursor
+      cursor,
+      cssLabel
     };
   }
 );
