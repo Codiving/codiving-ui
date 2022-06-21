@@ -5,34 +5,25 @@ import { shouldForwardProp } from "../utils/emotion";
 import Box from "./Box";
 
 interface StackProps {
-  cssLabel?: string;
-  children?: React.ReactNode;
   display?: "flex" | "inline-flex";
-  flexDirection?: React.CSSProperties["flexDirection"];
+  direction?: React.CSSProperties["flexDirection"];
   justifyContent?: React.CSSProperties["justifyContent"];
   alignItems?: React.CSSProperties["alignItems"];
   flexWrap?: React.CSSProperties["flexWrap"];
   spacing?: UIType.Spacing;
-  width?: React.CSSProperties["width"];
-  height?: React.CSSProperties["height"];
-  maxWidth?: React.CSSProperties["maxWidth"];
-  background?: React.CSSProperties["background"];
-  backgroundColor?: React.CSSProperties["backgroundColor"];
 }
 
 const getSpacing = (
   spacing?: UIType.Spacing,
-  flexDirection?: React.CSSProperties["flexDirection"]
+  direction?: React.CSSProperties["flexDirection"]
 ) => {
-  if (!spacing || !flexDirection) return {};
+  if (!spacing || !direction) return {};
 
-  const direction = flexDirection.includes("column")
-    ? "marginTop"
-    : "marginLeft";
+  const dir = direction.includes("column") ? "marginTop" : "marginLeft";
 
   return {
     "& :not(:first-of-type)": {
-      [direction]: spacing * 8
+      [dir]: spacing * 8
     }
   };
 };
@@ -40,43 +31,21 @@ const getSpacing = (
 const Stack = styled(Box, {
   shouldForwardProp: shouldForwardProp([
     "display",
-    "flexDirection",
+    "direction",
     "justifyContent",
     "alignItems",
     "flexWrap",
     "spacing",
-    "maxWidth",
-    "background",
-    "backgroundColor",
-    "cssLabel"
+    "maxWidth"
   ])
 })<StackProps>(
-  ({
+  ({ display, direction, justifyContent, alignItems, flexWrap, spacing }) => ({
     display,
-    flexDirection,
+    flexDirection: direction,
     justifyContent,
     alignItems,
     flexWrap,
-    spacing,
-    width,
-    height,
-    maxWidth,
-    background,
-    backgroundColor,
-    cssLabel
-  }) => ({
-    display,
-    flexDirection,
-    justifyContent,
-    alignItems,
-    flexWrap,
-    width,
-    height,
-    maxWidth,
-    background,
-    backgroundColor,
-    ...getSpacing(spacing, flexDirection),
-    cssLabel
+    ...getSpacing(spacing, direction)
   })
 );
 
@@ -84,5 +53,5 @@ export default memo(Stack);
 
 Stack.defaultProps = {
   display: "flex",
-  flexDirection: "column"
+  direction: "column"
 };
