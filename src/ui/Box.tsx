@@ -13,18 +13,27 @@ const Box = styled("div", {
     "pr",
     "pt",
     "pb",
-    "padding",
+    // "padding",
     "m",
     "ml",
     "mr",
     "mt",
     "mb",
-    "margin",
+    // "margin",
     "b",
     "bl",
     "br",
     "bt",
-    "bb"
+    "bb",
+    // "width",
+    "maxWidth",
+    "fullWidth",
+    // "height",
+    "maxHeight",
+    "fullHeight",
+    "cssLabel",
+    // "background",
+    "bgColor"
   ])
 })<BoxProps>(
   ({
@@ -44,7 +53,16 @@ const Box = styled("div", {
     bl,
     br,
     bt,
-    bb
+    bb,
+    width,
+    maxWidth,
+    fullWidth,
+    height,
+    maxHeight,
+    fullHeight,
+    background,
+    bgColor,
+    cssLabel
   }) => {
     const padding = getPadding(p, pl, pr, pt, pb, _padding);
     const margin = getMargin(m, ml, mr, mt, mb, _margin);
@@ -53,7 +71,14 @@ const Box = styled("div", {
     return {
       ...padding,
       ...margin,
-      ...border
+      ...border,
+      width: fullWidth ? "100%" : width ? width : undefined,
+      maxWidth: maxWidth,
+      height: fullHeight ? "100%" : height ? height : undefined,
+      maxHeight: maxHeight,
+      background,
+      backgroundColor: bgColor,
+      cssLabel
     };
   }
 );
