@@ -53,5 +53,5 @@ export default memo(Stack);
 
 Stack.defaultProps = {
   display: "flex",
-  direction: "column"
+  direction: "row"
 };
