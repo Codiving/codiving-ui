@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Color } from "../../theme/palette";
 import { convertHex } from "../../utils/function";
-import Stack from "../Stack";
 import ButtonRipple from "./ButtonRipple";
 
 export type Variant = "contained" | "outlined" | "text";
@@ -107,6 +106,14 @@ const TextButton = styled(CommonButton)<Props>(({ theme, color: _color }) => {
   };
 });
 
+const IconWrapper = styled("div")<{ position: "left" | "right" }>(
+  ({ position }) => ({
+    display: "flex",
+    marginRight: position === "left" ? 8 : -4,
+    marginLeft: position === "left" ? -4 : 8
+  })
+);
+
 const getComponent = (variant: Variant) => {
   if (variant === "contained") return ContainedButton;
   if (variant === "outlined") return OutlinedButton;
@@ -132,9 +139,9 @@ const Button = (props: Props) => {
 
   return (
     <Container type={type} size={size} color={color} {...rest}>
-      {startIcon && <Stack>{startIcon}</Stack>}
+      {!!startIcon && <IconWrapper position="left">{startIcon}</IconWrapper>}
       {children}
-      {endIcon && <Stack>{endIcon}</Stack>}
+      {!!endIcon && <IconWrapper position="right">{endIcon}</IconWrapper>}
       <ButtonRipple color={rippleColor} duration={duration} />
     </Container>
   );
