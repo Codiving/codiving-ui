@@ -16,10 +16,15 @@ interface CommonProps {
 
 interface Props
   extends Omit<React.ComponentProps<"button">, "color" | "disabled">,
-    Omit<CommonProps, "color"> {
+    Omit<CommonProps, "color" | "size"> {
   variant?: Variant;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  color?: Color;
+  size?: Size;
+}
+
+interface ButtonProps extends Omit<Props, "color"> {
   color: Color;
 }
 
@@ -53,7 +58,7 @@ const CommonButton = styled("button")<CommonProps>(
       overflow: "hidden",
       transition: "background-color 250ms",
       textTransform: uppercase ? "uppercase" : undefined,
-      //   userSelect: "none",
+      userSelect: "none",
       outline: 0,
       border: 0,
       margin: noMargin ? undefined : 8,
@@ -64,7 +69,7 @@ const CommonButton = styled("button")<CommonProps>(
   }
 );
 
-const ContainedButton = styled(CommonButton)<Props>(
+const ContainedButton = styled(CommonButton)<ButtonProps>(
   ({ theme, color: _color }) => {
     const color = theme.palette[_color].main;
 
@@ -80,7 +85,7 @@ const ContainedButton = styled(CommonButton)<Props>(
   }
 );
 
-const OutlinedButton = styled(CommonButton)<Props>(
+const OutlinedButton = styled(CommonButton)<ButtonProps>(
   ({ theme, color: _color }) => {
     const color = theme.palette[_color].main;
     return {
@@ -95,16 +100,18 @@ const OutlinedButton = styled(CommonButton)<Props>(
   }
 );
 
-const TextButton = styled(CommonButton)<Props>(({ theme, color: _color }) => {
-  const color = theme.palette[_color].main;
-  return {
-    color: color,
-    backgroundColor: "transparent",
-    "&:hover": {
-      backgroundColor: convertHex(color, 0.04)
-    }
-  };
-});
+const TextButton = styled(CommonButton)<ButtonProps>(
+  ({ theme, color: _color }) => {
+    const color = theme.palette[_color].main;
+    return {
+      color: color,
+      backgroundColor: "transparent",
+      "&:hover": {
+        backgroundColor: convertHex(color, 0.04)
+      }
+    };
+  }
+);
 
 const IconWrapper = styled("div")<{ position: "left" | "right" }>(
   ({ position }) => ({
