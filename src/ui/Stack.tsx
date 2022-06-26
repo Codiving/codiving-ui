@@ -22,7 +22,7 @@ const getSpacing = (
   const dir = direction.includes("column") ? "marginTop" : "marginLeft";
 
   return {
-    "& :not(:first-of-type)": {
+    "&:not(:first-of-type)": {
       [dir]: spacing * 8
     }
   };
