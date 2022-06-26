@@ -94,4 +94,4 @@ const green: Colors = {
 };
 
 export { blue, green };
-export type { Colors };
+export type { Color, Colors };
