@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { cloneElement, isValidElement } from "react";
+import { Color } from "../theme/palette";
 import { Size, Variant } from "./Button";
 
 interface ButtonGroupProps {
@@ -7,6 +8,7 @@ interface ButtonGroupProps {
   className?: string;
   variant?: Variant;
   size?: Size;
+  color?: Color;
 }
 
 const Container = styled("div", {
@@ -15,9 +17,8 @@ const Container = styled("div", {
   return {
     "& > [data-ui='button']": {
       boxShadow: "none",
-      // Button component에 있는 기본 margin 삭제
-      // props는 noMargin
-      // 그러나 noMargin을 다 쓰기엔 불필요 해보임
+      // props로 noMargin을 넘겨주어도 되지만
+      // css로 하는 게 더 나아 보임.
       margin: 0
     },
     "& > [data-ui='button']:first-of-type": {
@@ -37,11 +38,11 @@ const Container = styled("div", {
 });
 
 const ButtonGroup = (props: ButtonGroupProps) => {
-  const { children, variant, size, className } = props;
+  const { children, variant, size, color = "primary", className } = props;
 
   return (
-    <Container className={className}>
-      {variant || size
+    <Container className={className} color={color}>
+      {variant || size || color
         ? children.map((element, index) => {
             return (
               isValidElement(element) &&
@@ -49,6 +50,7 @@ const ButtonGroup = (props: ButtonGroupProps) => {
                 key: index,
                 variant: variant,
                 size: size,
+                color: color,
                 ...element.props
               })
             );
