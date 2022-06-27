@@ -94,7 +94,17 @@ const OutlinedButton = styled(CommonButton)<ButtonProps>(
       backgroundColor: "transparent",
       "&:hover": {
         border: `1px solid ${convertHex(color, 0.5)}`,
+        // TODO: 더 좋은 방법 있으면 수정
+        // border를 위해 0.25 주고 margin -1
+        borderLeft: `1px solid ${convertHex(color, 0.25)} !important`,
+        marginLeft: -1,
         backgroundColor: convertHex(color, 0.1)
+      },
+      // TODO: 더 좋은 방법 있으면 수정
+      // border를 위해 작업
+      "&:first-of-type:hover": {
+        marginLeft: 0,
+        border: `1px solid ${convertHex(color, 0.5)} !important`
       }
     };
   }
