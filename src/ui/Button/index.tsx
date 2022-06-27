@@ -47,7 +47,7 @@ const getStyles = (size: Size) => {
 };
 
 const CommonButton = styled("button")<CommonProps>(
-  ({ theme, uppercase, size, noMargin = false, disabled }) => {
+  ({ uppercase, size, noMargin = false, disabled }) => {
     const styles = getStyles(size);
 
     return {
@@ -72,7 +72,6 @@ const CommonButton = styled("button")<CommonProps>(
 const ContainedButton = styled(CommonButton)<ButtonProps>(
   ({ theme, color: _color }) => {
     const color = theme.palette[_color].main;
-
     return {
       color: "white",
       backgroundColor: convertHex(color, 0.7),
@@ -145,7 +144,7 @@ const Button = (props: Props) => {
   const duration = size === "small" ? 700 : size === "medium" ? 750 : 1000;
 
   return (
-    <Container type={type} size={size} color={color} {...rest}>
+    <Container type={type} size={size} color={color} {...rest} data-ui="button">
       {!!startIcon && <IconWrapper position="left">{startIcon}</IconWrapper>}
       {children}
       {!!endIcon && <IconWrapper position="right">{endIcon}</IconWrapper>}
