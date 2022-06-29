@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 
@@ -65,10 +66,34 @@ const ROUTES: IRoutes[] = [
 ];
 
 const Router = () => {
+  const gen = (routes: IRoutes) => {
+    const { children, path, component } = routes;
+
+    if (children.length) {
+      return children.map((child, index) => {
+        return <Fragment key={index}>{gen(child)}</Fragment>;
+      });
+    }
+
+    // console.log("# path", path);
+    return <Route path={path} element={component}></Route>;
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
+          {ROUTES.map((routes, index) => {
+            const { path, component } = routes;
+            console.log("path", path);
+            return (
+              <Route key={index} path={path} element={component}>
+                {gen(routes)}
+              </Route>
+            );
+          })}
+        </Route>
+        {/* <Route path="/" element={<MainLayout />}>
           <Route
             path="theme"
             element={
@@ -119,7 +144,7 @@ const Router = () => {
               </div>
             }
           ></Route>
-        </Route>
+        </Route> */}
       </Routes>
     </BrowserRouter>
   );
