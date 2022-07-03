@@ -11,19 +11,29 @@ interface StackProps {
   alignItems?: React.CSSProperties["alignItems"];
   flexWrap?: React.CSSProperties["flexWrap"];
   spacing?: UIType.Spacing;
+  crossSpacing?: UIType.Spacing;
 }
 
 const getSpacing = (
-  spacing?: UIType.Spacing,
+  spacing: UIType.Spacing,
+  crossSpacing: UIType.Spacing,
   direction?: React.CSSProperties["flexDirection"]
 ) => {
-  if (!spacing || !direction) return {};
+  if (!direction) return {};
 
-  const dir = direction.includes("column") ? "marginTop" : "marginLeft";
+  const [dir, crossDir] = direction.includes("column")
+    ? ["marginTop", "marginLeft"]
+    : ["marginLeft", "marginTop"];
+
+  const dirSpacing = spacing * 8;
+  const crossDirSpacing = crossSpacing * 8;
 
   return {
-    "&:not(:first-of-type)": {
-      [dir]: spacing * 8
+    [dir]: -dirSpacing,
+    [crossDir]: -crossDirSpacing,
+    "& > *": {
+      [dir]: dirSpacing,
+      [crossDir]: crossDirSpacing
     }
   };
 };
@@ -36,16 +46,25 @@ const Stack = styled(Box, {
     "alignItems",
     "flexWrap",
     "spacing",
+    "crossSpacing",
     "maxWidth"
   ])
 })<StackProps>(
-  ({ display, direction, justifyContent, alignItems, flexWrap, spacing }) => ({
+  ({
+    display = "flex",
+    direction = "row",
+    justifyContent,
+    alignItems,
+    flexWrap,
+    spacing = 0,
+    crossSpacing = 0
+  }) => ({
     display,
     flexDirection: direction,
     justifyContent,
     alignItems,
     flexWrap,
-    ...getSpacing(spacing, direction)
+    ...getSpacing(spacing, crossSpacing, direction)
   })
 );
 
