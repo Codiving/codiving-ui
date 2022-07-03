@@ -37,14 +37,16 @@ interface Border {
   bb?: UIType.Border;
 }
 
-interface Width {
+export interface Width {
   width?: React.CSSProperties["width"];
+  minWidth?: React.CSSProperties["minWidth"];
   maxWidth?: React.CSSProperties["maxWidth"];
   fullWidth?: boolean;
 }
 
-interface Height {
+export interface Height {
   height?: React.CSSProperties["height"];
+  minHeight?: React.CSSProperties["minHeight"];
   maxHeight?: React.CSSProperties["maxHeight"];
   fullHeight?: boolean;
 }
@@ -53,6 +55,6 @@ export interface UIProps extends Padding, Margin, Border, Width, Height {
   children?: React.ReactNode;
   cssLabel?: string;
   background?: React.CSSProperties["background"];
-  bgColor?: React.CSSProperties["backgroundColor"];
+  backgroundColor?: React.CSSProperties["backgroundColor"];
   //   component?: ElementType<any>;
 }

@@ -26,14 +26,16 @@ const Box = styled("div", {
     "bt",
     "bb",
     // "width",
+    "minWidth",
     "maxWidth",
     "fullWidth",
     // "height",
+    "minHeight",
     "maxHeight",
     "fullHeight",
     "cssLabel",
     // "background",
-    "bgColor"
+    "backgroundColor"
   ])
 })<BoxProps>(
   ({
@@ -55,13 +57,15 @@ const Box = styled("div", {
     bt,
     bb,
     width,
+    minWidth,
     maxWidth,
     fullWidth,
     height,
+    minHeight,
     maxHeight,
     fullHeight,
     background,
-    bgColor,
+    backgroundColor,
     cssLabel
   }) => {
     const padding = getPadding(p, pl, pr, pt, pb, _padding);
@@ -73,11 +77,13 @@ const Box = styled("div", {
       ...margin,
       ...border,
       width: fullWidth ? "100%" : width ? width : undefined,
+      minWidth: minWidth,
       maxWidth: maxWidth,
       height: fullHeight ? "100%" : height ? height : undefined,
+      minHeight: minHeight,
       maxHeight: maxHeight,
       background,
-      backgroundColor: bgColor,
+      backgroundColor: backgroundColor,
       cssLabel
     };
   }
