@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { Button, Stack, Typography } from "../ui";
 import { Paper, PaperActions, PaperContents, PaperTitle } from "../ui/Paper";
 import StackItem from "../ui/StackItem";
+import { shouldForwardProp } from "../utils/emotion";
 
 const MainLayoutContainer = styled(Stack)(() => ({}));
 
@@ -16,13 +17,13 @@ const Sidebar = styled(StackItem)(() => ({
   background: "blue"
 }));
 
-const MainContents = styled(StackItem)<{ sidebarOpen: boolean }>(
-  ({ sidebarOpen }) => ({
-    marginLeft: sidebarOpen ? 250 : 0,
-    transition: "0.3s"
-    // background: "red"
-  })
-);
+const MainContents = styled(StackItem, {
+  shouldForwardProp: shouldForwardProp(["sidebarOpen"])
+})<{ sidebarOpen: boolean }>(({ sidebarOpen }) => ({
+  marginLeft: sidebarOpen ? 250 : 0,
+  transition: "0.3s"
+  // background: "red"
+}));
 
 const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
