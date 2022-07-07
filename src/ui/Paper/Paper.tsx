@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { shouldForwardProp } from "../../utils/emotion";
-import { PaperPadding } from "./utils";
 
 type PaperElevation = 0 | 1 | 2 | 3 | 4 | 5;
 type PaperVariant = "outlined";
@@ -9,7 +8,6 @@ interface PaperProps {
   elevation?: PaperElevation;
   variant?: PaperVariant;
   square?: boolean;
-  noPadding?: boolean;
 }
 
 const getPaperShadow = (elevation: PaperElevation) => {
@@ -30,25 +28,18 @@ const getPaperShadow = (elevation: PaperElevation) => {
 };
 
 const Paper = styled("div", {
-  shouldForwardProp: shouldForwardProp([
-    "elevation",
-    "variant",
-    "square",
-    "noPadding"
-  ])
-})<PaperProps>(
-  ({ elevation = 2, variant, square = false, noPadding = false }) => {
-    const boxShadow = getPaperShadow(elevation);
-    return {
-      border: variant === "outlined" ? "1px solid rgba(0,0,0,0.12)" : undefined,
-      borderRadius: square ? undefined : 4,
-      boxShadow,
-      padding: noPadding ? 0 : PaperPadding
-      // [`${PaperContents}`]: {
-      //   background: "red"
-      // }
-    };
-  }
-);
+  shouldForwardProp: shouldForwardProp(["elevation", "variant", "square"])
+})<PaperProps>(({ elevation = 2, variant, square = false }) => {
+  const boxShadow = getPaperShadow(elevation);
+  return {
+    border: variant === "outlined" ? "1px solid rgba(0,0,0,0.12)" : undefined,
+    borderRadius: square ? undefined : 4,
+    boxShadow
+    // padding: noPadding ? 0 : PaperPadding
+    // [`${PaperContents}`]: {
+    //   background: "red"
+    // }
+  };
+});
 
 export default Paper;
