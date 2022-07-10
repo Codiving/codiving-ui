@@ -33,7 +33,7 @@ const Box = styled("div", {
     "minHeight",
     "maxHeight",
     "fullHeight",
-    "cssLabel",
+    "label",
     // "background",
     "backgroundColor"
   ])
@@ -66,7 +66,7 @@ const Box = styled("div", {
     fullHeight,
     background,
     backgroundColor,
-    cssLabel
+    label
   }) => {
     const padding = getPadding(p, pl, pr, pt, pb, _padding);
     const margin = getMargin(m, ml, mr, mt, mb, _margin);
@@ -84,7 +84,7 @@ const Box = styled("div", {
       maxHeight: maxHeight,
       background,
       backgroundColor: backgroundColor,
-      cssLabel
+      label
     };
   }
 );

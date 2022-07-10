@@ -53,7 +53,7 @@ export interface Height {
 
 export interface UIProps extends Padding, Margin, Border, Width, Height {
   children?: React.ReactNode;
-  cssLabel?: string;
+  label?: string;
   background?: React.CSSProperties["background"];
   backgroundColor?: React.CSSProperties["backgroundColor"];
   //   component?: ElementType<any>;
