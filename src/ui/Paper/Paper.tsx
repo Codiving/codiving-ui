@@ -35,10 +35,6 @@ const Paper = styled("div", {
     border: variant === "outlined" ? "1px solid rgba(0,0,0,0.12)" : undefined,
     borderRadius: square ? undefined : 4,
     boxShadow
-    // padding: noPadding ? 0 : PaperPadding
-    // [`${PaperContents}`]: {
-    //   background: "red"
-    // }
   };
 });
 
