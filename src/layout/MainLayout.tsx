@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Button, Stack, Typography } from "../ui";
+import { Tree } from "../components";
+import { Button, Stack } from "../ui";
 import { Paper, PaperActions, PaperContents, PaperTitle } from "../ui/Paper";
 import StackItem from "../ui/StackItem";
 import { shouldForwardProp } from "../utils/emotion";
@@ -34,7 +35,8 @@ const MainLayout = () => {
 
   return (
     <>
-      <Sidebar
+      <Tree />
+      {/* <Sidebar
         width={sidebarOpen ? 250 : 0}
         opacity={sidebarOpen ? 1 : 0}
         transition="0.3s"
@@ -49,17 +51,9 @@ const MainLayout = () => {
         <Typography>하이하이하이하이하</Typography>
         <Typography>하이하이하이하이하</Typography>
         <Typography>하이하이하이하이하</Typography>
-      </Sidebar>
+      </Sidebar> */}
 
       <MainLayoutContainer minHeight="100vh">
-        {/* <Sidebar
-        width={sidebarOpen ? 250 : 0}
-        opacity={sidebarOpen ? 1 : 0}
-        transition="0.3s"
-      >
-       
-      </Sidebar>
-*/}
         <MainContents flex={1} background="#fff" sidebarOpen={sidebarOpen}>
           <div>헤더</div>
           <div>메인</div>
