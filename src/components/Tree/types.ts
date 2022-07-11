@@ -1,7 +1,8 @@
 interface Item {
   id: string;
   label: string;
-  selected: boolean;
+  isSelected: boolean;
+  isOpen: boolean;
   pl?: number;
 }
 
