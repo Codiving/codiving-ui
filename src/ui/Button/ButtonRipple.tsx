@@ -62,9 +62,9 @@ const ButtonRipple = (props: Props) => {
         x: _x,
         y: _y
       } = e.currentTarget.getBoundingClientRect();
-      const { pageX, pageY, clientX, clientY } = e;
+      // const { pageX, pageY, clientX, clientY } = e;
 
-      console.log(pageX, pageY, clientX, clientY);
+      // console.log(pageX, pageY, clientX, clientY);
       const size = width > height ? width : height;
 
       const x = e.clientX - _x - size / 2;
