@@ -137,6 +137,10 @@ const resetCSS = css`
     text-decoration: none;
     color: black;
   }
+
+  button {
+    padding: 0;
+  }
 `;
 
 export default resetCSS;
