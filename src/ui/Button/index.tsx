@@ -11,6 +11,7 @@ interface CommonProps {
   uppercase?: boolean;
   size: Size;
   noMargin?: boolean;
+  noPadding?: boolean;
   disabled?: boolean;
 }
 
@@ -28,27 +29,27 @@ interface ButtonProps extends Omit<Props, "color"> {
   color: Color;
 }
 
-const getStyles = (size: Size) => {
+const getStyles = (size: Size, noPadding: boolean) => {
   if (size === "small")
     return {
-      padding: "3px 9px",
+      padding: noPadding ? undefined : "3px 9px",
       fontSize: "0.8125rem"
     };
   if (size === "medium")
     return {
-      padding: "5px 15px",
+      padding: noPadding ? undefined : "5px 15px",
       fontSize: "0.875rem"
     };
   if (size === "large")
     return {
-      padding: "7px 21px",
+      padding: noPadding ? undefined : "7px 21px",
       fontSize: "0.9375rem"
     };
 };
 
 const CommonButton = styled("button")<CommonProps>(
-  ({ uppercase, size, noMargin = false, disabled }) => {
-    const styles = getStyles(size);
+  ({ uppercase, size, noMargin = false, noPadding = false, disabled }) => {
+    const styles = getStyles(size, noPadding);
 
     return {
       display: "inline-flex",
