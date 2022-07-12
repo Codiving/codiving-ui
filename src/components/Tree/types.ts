@@ -1,7 +1,6 @@
 interface Item {
   id: string;
   label: string;
-  isSelected: boolean;
   isOpen: boolean;
   pl?: number;
 }
@@ -12,9 +11,9 @@ interface FileItem extends Item {
 
 interface FolderItem extends Item {
   type: "folder";
-  children: Tree;
+  children: TreeData;
 }
 
 export type TreeItem = FileItem | FolderItem;
 
-export type Tree = TreeItem[];
+export type TreeData = TreeItem[];
