@@ -23,6 +23,7 @@ interface Props
   endIcon?: React.ReactNode;
   color?: Color;
   size?: Size;
+  noRipple?: boolean;
 }
 
 interface ButtonProps extends Omit<Props, "color"> {
@@ -148,6 +149,7 @@ const Button = (props: Props) => {
     endIcon,
     children,
     color = "primary",
+    noRipple = false,
     ...rest
   } = props;
 
@@ -160,7 +162,7 @@ const Button = (props: Props) => {
       {!!startIcon && <IconWrapper position="left">{startIcon}</IconWrapper>}
       {children}
       {!!endIcon && <IconWrapper position="right">{endIcon}</IconWrapper>}
-      <ButtonRipple color={rippleColor} duration={duration} />
+      {!noRipple && <ButtonRipple color={rippleColor} duration={duration} />}
     </Container>
   );
 };
