@@ -1,19 +1,59 @@
 import { useMemo } from "react";
 import { Button, Stack, Typography } from "../../../ui";
 import Div from "../../../ui/Div";
-import { TreeItem } from "../types";
+import { TreeData, TreeItem } from "../types";
+import { AiFillFolderOpen, AiFillFolder } from "react-icons/ai";
+import IconButton from "../../../ui/IconButton";
+import styled from "@emotion/styled";
 
-const TreeInner = (props: TreeItem) => {
-  const { label, type, pl = 0, id, isSelected, isOpen } = props;
+const FolderButton = styled(IconButton)(() => {
+  return {
+    "& > svg": {
+      width: 24,
+      height: 24
+    }
+  };
+});
 
-  const padding = useMemo(() => `8px 8px 8px ${8 * pl}px`, [pl]);
+const TreeItemText = styled(Typography)(() => {
+  return {
+    paddingLeft: 6
+  };
+});
+
+type TreeInnerProps = TreeItem & {
+  onChange: (value: TreeData) => void;
+  history: number[];
+  selected: number[];
+  onClick: (selected: number[]) => void;
+};
+
+const TreeInner = (props: TreeInnerProps) => {
+  const {
+    label,
+    type,
+    pl = 0,
+    id,
+    isOpen,
+    onChange,
+    history,
+    selected,
+    onClick
+  } = props;
+
+  const padding = useMemo(() => {
+    if (type !== "folder") {
+      return `8px 8px 8px ${8 * pl + 10}px`;
+    }
+    return `8px 8px 8px ${8 * pl}px`;
+  }, [pl, type]);
 
   return (
     <Div
       label="트리-이너-컨테이너"
       onClick={e => {
         e.stopPropagation();
-        console.log("# id", id, label);
+        console.log("history", history);
       }}
     >
       <Stack
@@ -22,17 +62,27 @@ const TreeInner = (props: TreeItem) => {
         alignItems="center"
       >
         {type === "folder" ? (
-          <Button noMargin noPadding>
-            {isOpen ? "열기" : "접기"}
-          </Button>
+          <FolderButton noRipple noMargin noPadding>
+            {isOpen ? <AiFillFolderOpen /> : <AiFillFolder />}
+          </FolderButton>
         ) : (
           ""
         )}
-        <Typography component="p">{label}</Typography>
+        <TreeItemText component="p">{label}</TreeItemText>
       </Stack>
       {type === "folder" &&
-        props.children.map(el => {
-          return <TreeInner key={el.id} {...el} pl={pl + 2} />;
+        props.children.map((el, index) => {
+          return (
+            <TreeInner
+              key={el.id}
+              {...el}
+              pl={pl + 2}
+              onChange={onChange}
+              selected={selected}
+              onClick={onClick}
+              history={[...history, index]}
+            />
+          );
         })}
     </Div>
   );
