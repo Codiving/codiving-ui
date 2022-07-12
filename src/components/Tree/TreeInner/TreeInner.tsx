@@ -28,6 +28,21 @@ type TreeInnerProps = TreeItem & {
   onClick: (selected: number[]) => void;
 };
 
+const TreeInnerContainer = styled(Div)<{ isOpen: boolean }>(({ isOpen }) => {
+  if (!isOpen)
+    return {
+      height: "100%",
+      opacity: 1
+    };
+  return {
+    "& > :not(:first-of-type)": {
+      // transition: "0.3s",
+      height: 0,
+      opacity: 0
+    }
+  };
+});
+
 const TreeInner = (props: TreeInnerProps) => {
   const {
     label,
@@ -49,21 +64,29 @@ const TreeInner = (props: TreeInnerProps) => {
   }, [pl, type]);
 
   return (
-    <Div
+    <TreeInnerContainer
       label="트리-이너-컨테이너"
       onClick={e => {
         e.stopPropagation();
-        console.log("history", history);
+
+        onClick(history);
       }}
+      isOpen={isOpen}
+      data-type={isOpen}
     >
       <Stack
         label="트리-이너-아이템-컨테이너"
         padding={padding}
         alignItems="center"
+        background={
+          JSON.stringify(selected) === JSON.stringify(history)
+            ? "red"
+            : undefined
+        }
       >
         {type === "folder" ? (
           <FolderButton noRipple noMargin noPadding>
-            {isOpen ? <AiFillFolderOpen /> : <AiFillFolder />}
+            {isOpen ? <AiFillFolder /> : <AiFillFolderOpen />}
           </FolderButton>
         ) : (
           ""
@@ -84,7 +107,7 @@ const TreeInner = (props: TreeInnerProps) => {
             />
           );
         })}
-    </Div>
+    </TreeInnerContainer>
   );
 };
 
