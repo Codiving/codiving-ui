@@ -1,23 +1,30 @@
-import { useMemo } from "react";
-import { Button, Stack, Typography } from "../../../ui";
-import Div from "../../../ui/Div";
-import { TreeData, TreeItem } from "../types";
-import { AiFillFolderOpen, AiFillFolder } from "react-icons/ai";
-import IconButton from "../../../ui/IconButton";
 import styled from "@emotion/styled";
+import { useMemo } from "react";
+import { AiFillFolder, AiFillFolderOpen } from "react-icons/ai";
+import { Stack, Typography } from "../../../ui";
+import Div from "../../../ui/Div";
+import IconButton from "../../../ui/IconButton";
+import { shouldForwardProp } from "../../../utils/emotion";
+import { TreeData, TreeItem } from "../types";
 
-const FolderButton = styled(IconButton)(() => {
+const FolderButton = styled(IconButton, {
+  shouldForwardProp: shouldForwardProp(["selected"])
+})<{ selected: boolean }>(({ selected }) => {
   return {
     "& > svg": {
       width: 24,
-      height: 24
+      height: 24,
+      color: selected ? "white" : undefined
     }
   };
 });
 
-const TreeItemText = styled(Typography)(() => {
+const TreeItemText = styled(Typography, {
+  shouldForwardProp: shouldForwardProp(["selected"])
+})<{ selected: boolean }>(({ selected }) => {
   return {
-    paddingLeft: 6
+    paddingLeft: 6,
+    color: selected ? "white" : undefined
   };
 });
 
@@ -28,7 +35,9 @@ type TreeInnerProps = TreeItem & {
   onClick: (selected: number[]) => void;
 };
 
-const TreeInnerContainer = styled(Div)<{ isOpen: boolean }>(({ isOpen }) => {
+const TreeInnerContainer = styled(Div, {
+  shouldForwardProp: shouldForwardProp(["isOpen"])
+})<{ isOpen: boolean }>(({ isOpen }) => {
   if (!isOpen)
     return {
       height: "100%",
@@ -36,10 +45,18 @@ const TreeInnerContainer = styled(Div)<{ isOpen: boolean }>(({ isOpen }) => {
     };
   return {
     "& > :not(:first-of-type)": {
-      // transition: "0.3s",
       height: 0,
-      opacity: 0
+      opacity: 0,
+      pointerEvents: "none"
     }
+  };
+});
+
+const TreeInnerItemContainer = styled(Stack, {
+  shouldForwardProp: shouldForwardProp(["selected"])
+})<{ selected: boolean }>(({ theme, selected }) => {
+  return {
+    background: selected ? theme.palette.primary.light : undefined
   };
 });
 
@@ -52,7 +69,7 @@ const TreeInner = (props: TreeInnerProps) => {
     isOpen,
     onChange,
     history,
-    selected,
+    selected: _selected,
     onClick
   } = props;
 
@@ -62,6 +79,8 @@ const TreeInner = (props: TreeInnerProps) => {
     }
     return `8px 8px 8px ${8 * pl}px`;
   }, [pl, type]);
+
+  const selected = JSON.stringify(_selected) === JSON.stringify(history);
 
   return (
     <TreeInnerContainer
@@ -74,25 +93,23 @@ const TreeInner = (props: TreeInnerProps) => {
       isOpen={isOpen}
       data-type={isOpen}
     >
-      <Stack
+      <TreeInnerItemContainer
         label="트리-이너-아이템-컨테이너"
         padding={padding}
         alignItems="center"
-        background={
-          JSON.stringify(selected) === JSON.stringify(history)
-            ? "red"
-            : undefined
-        }
+        selected={selected}
       >
         {type === "folder" ? (
-          <FolderButton noRipple noMargin noPadding>
+          <FolderButton noRipple noMargin noPadding selected={selected}>
             {isOpen ? <AiFillFolder /> : <AiFillFolderOpen />}
           </FolderButton>
         ) : (
           ""
         )}
-        <TreeItemText component="p">{label}</TreeItemText>
-      </Stack>
+        <TreeItemText component="p" selected={selected}>
+          {label}
+        </TreeItemText>
+      </TreeInnerItemContainer>
       {type === "folder" &&
         props.children.map((el, index) => {
           return (
@@ -101,7 +118,7 @@ const TreeInner = (props: TreeInnerProps) => {
               {...el}
               pl={pl + 2}
               onChange={onChange}
-              selected={selected}
+              selected={_selected}
               onClick={onClick}
               history={[...history, index]}
             />
