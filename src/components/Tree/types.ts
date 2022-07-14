@@ -5,6 +5,13 @@ interface Item {
   pl?: number;
 }
 
+const TREE_ITEM_TYPE = {
+  file: "file",
+  folder: "folder"
+} as const;
+
+type TreeItemType = typeof TREE_ITEM_TYPE[keyof typeof TREE_ITEM_TYPE];
+
 interface FileItem extends Item {
   type: "file";
 }
@@ -14,6 +21,9 @@ interface FolderItem extends Item {
   children: TreeData;
 }
 
-export type TreeItem = FileItem | FolderItem;
+type TreeItem = FileItem | FolderItem;
 
-export type TreeData = TreeItem[];
+type TreeData = TreeItem[];
+
+export { TREE_ITEM_TYPE };
+export type { TreeItemType, TreeItem, TreeData };
