@@ -1,9 +1,7 @@
-function shouldForwardProp(
-  props: PropertyKey[]
-): (propName: PropertyKey) => boolean {
-  return propName => {
+const shouldForwardProp = (props: PropertyKey[]) => {
+  return (propName: PropertyKey) => {
     return !props.includes(propName);
   };
-}
+};
 
 export { shouldForwardProp };
