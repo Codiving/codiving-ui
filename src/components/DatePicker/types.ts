@@ -5,6 +5,14 @@ const MOVE_MODE = {
 
 type MoveMode = typeof MOVE_MODE[keyof typeof MOVE_MODE];
 
-export { MOVE_MODE };
+const VIEW_MODE = {
+  year: "year",
+  month: "month",
+  calendar: "calendar"
+};
 
-export type { MoveMode };
+type ViewMode = typeof VIEW_MODE[keyof typeof VIEW_MODE];
+
+export { MOVE_MODE, VIEW_MODE };
+
+export type { MoveMode, ViewMode };

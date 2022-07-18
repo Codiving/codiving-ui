@@ -1,16 +1,17 @@
 import { Stack, Typography } from "../../../ui";
 import Div from "../../../ui/Div";
 import DateObject from "../../../utils/DateObject/DateObject";
-import { MoveMode, MOVE_MODE } from "../types";
+import { MoveMode, MOVE_MODE, ViewMode } from "../types";
 
 interface DatePickerMoveProps {
   date: Date;
   onChange: (value: Date) => void;
   mode: MoveMode;
+  onClick: (value: ViewMode) => void;
 }
 
 const DatePickerMove = (props: DatePickerMoveProps) => {
-  const { date, onChange, mode } = props;
+  const { date, onChange, mode, onClick } = props;
 
   const dObject = new DateObject(date);
 
@@ -27,7 +28,7 @@ const DatePickerMove = (props: DatePickerMoveProps) => {
   return (
     <Stack spacing={2} padding={10}>
       <Div onClick={onClickPrev}>왼</Div>
-      <Typography>
+      <Typography onClick={() => onClick(mode)}>
         {MOVE_MODE.year ? dObject.format("YYYY") : dObject.format("MM")}
       </Typography>
       <Div onClick={onClickAfter}>오</Div>
