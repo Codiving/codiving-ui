@@ -1,5 +1,5 @@
-import { Typography } from "../../../../ui";
-import DateObject from "../../../../utils/DateObject/DateObject";
+import { Typography } from "../../../ui";
+import DateObject from "../../../utils/DateObject/DateObject";
 
 interface DatePickerHeaderProps {
   date: Date;
