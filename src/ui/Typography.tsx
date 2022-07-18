@@ -15,6 +15,7 @@ interface ContainerProps {
   variant?: Variant;
   fontSize?: React.CSSProperties["fontSize"];
   cursor?: React.CSSProperties["cursor"];
+  textAlign?: React.CSSProperties["textAlign"];
 }
 
 const Container = styled("span", {
@@ -23,10 +24,18 @@ const Container = styled("span", {
     "fontSize",
     "cursor",
     "cssLabel",
+    "textAlign",
     "as"
   ])
 })<ContainerProps>(
-  ({ theme, variant = "body1", fontSize: _fontSize, cursor, cssLabel }) => {
+  ({
+    theme,
+    variant = "body1",
+    fontSize: _fontSize,
+    cursor,
+    cssLabel,
+    textAlign
+  }) => {
     const baseStyle = theme.typography[variant];
     // fontSize props로 넘어온 경우 교체
     const fontSize = _fontSize ? _fontSize : baseStyle.fontSize;
@@ -35,7 +44,8 @@ const Container = styled("span", {
       ...baseStyle,
       fontSize,
       cursor,
-      cssLabel
+      cssLabel,
+      textAlign
     };
   }
 );
