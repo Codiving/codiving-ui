@@ -1,17 +1,18 @@
-import { useMemo } from "react";
-import { Stack } from "../../../ui";
+import { Stack, Typography } from "../../../ui";
+import Div from "../../../ui/Div";
 import DateObject from "../../../utils/DateObject/DateObject";
+import { MoveMode, MOVE_MODE } from "../types";
 
 interface DatePickerMoveProps {
   date: Date;
   onChange: (value: Date) => void;
-  mode: "year" | "month";
+  mode: MoveMode;
 }
 
 const DatePickerMove = (props: DatePickerMoveProps) => {
   const { date, onChange, mode } = props;
 
-  const dObject = useMemo(() => new DateObject(date), [date]);
+  const dObject = new DateObject(date);
 
   const onClickPrev = () => {
     const newDate = dObject.subtract(1, mode).getDateObject;
@@ -25,11 +26,11 @@ const DatePickerMove = (props: DatePickerMoveProps) => {
 
   return (
     <Stack spacing={2} padding={10}>
-      <div onClick={onClickPrev}>왼</div>
-      <div>
-        {mode === "year" ? dObject.format("YYYY") : dObject.format("MM")}
-      </div>
-      <div onClick={onClickAfter}>오</div>
+      <Div onClick={onClickPrev}>왼</Div>
+      <Typography>
+        {MOVE_MODE.year ? dObject.format("YYYY") : dObject.format("MM")}
+      </Typography>
+      <Div onClick={onClickAfter}>오</Div>
     </Stack>
   );
 };
