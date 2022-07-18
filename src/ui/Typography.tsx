@@ -2,15 +2,13 @@ import styled from "@emotion/styled";
 import { memo } from "react";
 import { Component, Variant } from "../theme/typography";
 import { shouldForwardProp } from "../utils/emotion";
-
-interface TypographyProps extends ContainerProps {
+interface TypographyProps extends ContainerProps, React.ComponentProps<"span"> {
   className?: string;
   children?: React.ReactNode;
   component?: Component;
 }
 
 interface ContainerProps {
-  // } extends React.ComponentProps<"span"> {
   cssLabel?: string;
   variant?: Variant;
   fontSize?: React.CSSProperties["fontSize"];
