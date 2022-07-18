@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Tree } from "../components";
-import { TREE_DUMMY } from "../components/Tree/dummy";
+import DatePicker from "../components/DatePicker";
 import { Button, Stack } from "../ui";
 import { Paper, PaperActions, PaperContents, PaperTitle } from "../ui/Paper";
 import StackItem from "../ui/StackItem";
@@ -28,7 +27,6 @@ const MainContents = styled(StackItem, {
 }));
 
 const MainLayout = () => {
-  const [treeData, setTreeData] = useState(TREE_DUMMY);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const onChangeSidebarOpen = () => setSidebarOpen(prev => !prev);
@@ -37,7 +35,6 @@ const MainLayout = () => {
 
   return (
     <>
-      <Tree value={treeData} onChange={e => setTreeData(e)} />
       {/* <Sidebar
         width={sidebarOpen ? 250 : 0}
         opacity={sidebarOpen ? 1 : 0}
