@@ -1,5 +1,8 @@
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import dayjs from "dayjs";
 import { ManipulateType, OpUnitType } from "dayjs/esm";
+
+dayjs.extend(isSameOrBefore);
 
 class DateObject {
   private readonly _date = new Date();
@@ -32,6 +35,10 @@ class DateObject {
 
   public subtract(value: number, unit?: ManipulateType) {
     return new DateObject(this.dayjsObject.subtract(value, unit).toDate());
+  }
+
+  public isSameOrBefore(compare: DateObject, unit?: OpUnitType) {
+    return this.dayjsObject.isSameOrBefore(compare.getDateObject, unit);
   }
 
   public format(_format: string) {
