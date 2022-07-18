@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { ManipulateType } from "dayjs/esm";
+import { ManipulateType, OpUnitType } from "dayjs/esm";
 
 class DateObject {
   private readonly _date = new Date();
@@ -16,6 +16,14 @@ class DateObject {
 
   public get getDateObject() {
     return this._date;
+  }
+
+  public startOf(unit: OpUnitType) {
+    return new DateObject(this.dayjsObject.startOf(unit).toDate());
+  }
+
+  public endOf(unit: OpUnitType) {
+    return new DateObject(this.dayjsObject.endOf(unit).toDate());
   }
 
   public add(value: number, unit?: ManipulateType) {
