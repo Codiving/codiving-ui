@@ -11,7 +11,7 @@ export namespace UIType {
   export type Spacing = typeof SPACING[number];
 }
 
-interface Padding {
+export interface Padding {
   p?: UIType.Padding;
   pl?: UIType.Padding;
   pr?: UIType.Padding;
@@ -20,7 +20,7 @@ interface Padding {
   padding?: UIType.Padding;
 }
 
-interface Margin {
+export interface Margin {
   m?: UIType.Margin;
   ml?: UIType.Margin;
   mr?: UIType.Margin;
@@ -29,7 +29,7 @@ interface Margin {
   margin?: UIType.Margin;
 }
 
-interface Border {
+export interface Border {
   b?: UIType.Border;
   bl?: UIType.Border;
   br?: UIType.Border;
