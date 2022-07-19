@@ -31,7 +31,11 @@ const DatePickerMove = (props: DatePickerMoveProps) => {
       <IconButton onClick={onClickPrev} noMargin noPadding noRipple>
         <AiOutlineCaretLeft width={20} height={20} />
       </IconButton>
-      <Typography onClick={() => onClick(mode)} textAlign="center">
+      <Typography
+        component="p"
+        onClick={() => onClick(mode)}
+        textAlign="center"
+      >
         {MOVE_MODE.year === mode
           ? dObject.format("YYYY")
           : dObject.format("MM")}
