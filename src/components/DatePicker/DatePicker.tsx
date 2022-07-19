@@ -21,9 +21,10 @@ const DatePicker = (props: DatePickerProps) => {
   const [date, setDate] = useState(value);
   const [mode, setMode] = useState(VIEW_MODE.calendar);
 
-  const onChangeDate = (newDate: Date) => {
+  const onChangeDate = (newDate: Date, modeChange?: boolean) => {
     setDate(newDate);
-    setMode(VIEW_MODE.calendar);
+
+    if (modeChange) setMode(VIEW_MODE.calendar);
   };
 
   const onChangeMode = (newMode: ViewMode) => setMode(newMode);
