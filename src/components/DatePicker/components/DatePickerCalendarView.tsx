@@ -25,14 +25,20 @@ const WeekDateText = () => {
   const startOfWeek = new DateObject().startOf("week");
 
   return (
-    <Stack label="WeekDateText">
-      {[0, 1, 2, 3, 4, 5, 6].map(item => (
-        <StackItem flex={1}>
-          <Typography component="p" textAlign="center">
-            {startOfWeek.add(item, "day").format("dd")}
-          </Typography>
-        </StackItem>
-      ))}
+    <Stack label="WeekDateText" bt="1px solid" bb="1px solid">
+      {[0, 1, 2, 3, 4, 5, 6].map((day, index) => {
+        const sunday = index === 0;
+        const saturday = index === 6;
+        const color = sunday ? "red" : saturday ? "blue" : undefined;
+
+        return (
+          <StackItem flex={1} key={day} p={8}>
+            <Typography component="p" textAlign="center" color={color}>
+              {startOfWeek.add(day, "day").format("dd")}
+            </Typography>
+          </StackItem>
+        );
+      })}
     </Stack>
   );
 };
@@ -45,16 +51,25 @@ const DatePickerCalendarView = (props: DatePickerCalendarViewProps) => {
   return (
     <Stack label="DatePickerCalendarView" direction="column">
       <WeekDateText />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {dayRange.map(day => (
-          <div
-            style={{ width: `${100 / 7}%`, textAlign: "center" }}
-            key={day.toDateString()}
-          >
-            {new DateObject(day).format("DD")}
-          </div>
-        ))}
-      </div>
+      <Stack flexWrap="wrap">
+        {dayRange.map((day, index) => {
+          const sunday = index % 7 === 0;
+          const saturday = index % 7 === 6;
+          const color = sunday ? "red" : saturday ? "blue" : undefined;
+
+          return (
+            <StackItem
+              key={day.toDateString()}
+              width={`${100 / 7}%`}
+              padding="14px 8px"
+            >
+              <Typography component="p" textAlign="center" color={color}>
+                {new DateObject(day).format("DD")}
+              </Typography>
+            </StackItem>
+          );
+        })}
+      </Stack>
     </Stack>
   );
 };
