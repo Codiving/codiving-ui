@@ -12,7 +12,20 @@ interface StackItemProps extends React.ComponentProps<"div">, Width, Height {
 }
 
 const StackItem = styled(Box, {
-  shouldForwardProp: shouldForwardProp(["flex"])
+  shouldForwardProp: shouldForwardProp([
+    "width",
+    "minWidth",
+    "maxWidth",
+    "fullWidth",
+    "height",
+    "minHeight",
+    "maxHeight",
+    "fullHeight",
+    "flex",
+    "transition",
+    "background",
+    "opacity"
+  ])
 })<StackItemProps>(
   ({
     width,
