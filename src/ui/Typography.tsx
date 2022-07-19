@@ -32,7 +32,8 @@ const Container = styled("span", {
     fontSize: _fontSize,
     cursor,
     cssLabel,
-    textAlign
+    textAlign,
+    color
   }) => {
     const baseStyle = theme.typography[variant];
     // fontSize props로 넘어온 경우 교체
@@ -43,7 +44,8 @@ const Container = styled("span", {
       fontSize,
       cursor,
       cssLabel,
-      textAlign
+      textAlign,
+      color
     };
   }
 );
