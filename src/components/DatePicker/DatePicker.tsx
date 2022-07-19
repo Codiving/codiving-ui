@@ -21,7 +21,10 @@ const DatePicker = (props: DatePickerProps) => {
   const [date, setDate] = useState(value);
   const [mode, setMode] = useState(VIEW_MODE.calendar);
 
-  const onChangeDate = (newDate: Date) => setDate(newDate);
+  const onChangeDate = (newDate: Date) => {
+    setDate(newDate);
+    setMode(VIEW_MODE.calendar);
+  };
 
   const onChangeMode = (newMode: ViewMode) => setMode(newMode);
 
@@ -51,7 +54,9 @@ const DatePicker = (props: DatePickerProps) => {
       {mode === VIEW_MODE.calendar && (
         <DatePickerCalendarView date={date} onChange={onChange} />
       )}
-      {mode === VIEW_MODE.year && <DatePickerYearView />}
+      {mode === VIEW_MODE.year && (
+        <DatePickerYearView date={date} onChange={onChangeDate} />
+      )}
       {mode === VIEW_MODE.month && <DatePickerMonthView />}
       <GoToCurrentDate onClick={onChangeCurrentDate} />
     </Stack>
