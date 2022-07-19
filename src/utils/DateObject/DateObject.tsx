@@ -1,8 +1,10 @@
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import dayjs from "dayjs";
 import { ManipulateType, OpUnitType } from "dayjs/esm";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 
 dayjs.extend(isSameOrBefore);
+dayjs.extend(weekOfYear);
 
 class DateObject {
   private readonly _date = new Date();
@@ -19,6 +21,66 @@ class DateObject {
 
   public get getDateObject() {
     return this._date;
+  }
+
+  public get year() {
+    return this.dayjsObject.year();
+  }
+
+  public get month() {
+    return this.dayjsObject.month();
+  }
+
+  public get date() {
+    return this.dayjsObject.date();
+  }
+
+  public get hour() {
+    return this.dayjsObject.hour();
+  }
+
+  public get minute() {
+    return this.dayjsObject.minute();
+  }
+
+  public get second() {
+    return this.dayjsObject.second();
+  }
+
+  public get week() {
+    return this.dayjsObject.week();
+  }
+
+  public get day() {
+    return this.dayjsObject.day();
+  }
+
+  public setYear(year: number) {
+    return new DateObject(this.dayjsObject.set("year", year).toDate());
+  }
+
+  public setMonth(month: number) {
+    return new DateObject(this.dayjsObject.set("month", month).toDate());
+  }
+
+  public setDay(day: number) {
+    return new DateObject(this.dayjsObject.set("day", day).toDate());
+  }
+
+  public setDate(date: number) {
+    return new DateObject(this.dayjsObject.set("date", date).toDate());
+  }
+
+  public setHour(hour: number) {
+    return new DateObject(this.dayjsObject.set("hour", hour).toDate());
+  }
+
+  public setMinute(minute: number) {
+    return new DateObject(this.dayjsObject.set("minute", minute).toDate());
+  }
+
+  public setSecond(second: number) {
+    return new DateObject(this.dayjsObject.set("second", second).toDate());
   }
 
   public startOf(unit: OpUnitType) {
