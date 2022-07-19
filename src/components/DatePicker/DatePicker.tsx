@@ -58,7 +58,9 @@ const DatePicker = (props: DatePickerProps) => {
       {mode === VIEW_MODE.year && (
         <DatePickerYearView date={date} onChange={onChangeDate} />
       )}
-      {mode === VIEW_MODE.month && <DatePickerMonthView />}
+      {mode === VIEW_MODE.month && (
+        <DatePickerMonthView date={date} onChange={onChangeDate} />
+      )}
       <GoToCurrentDate onClick={onChangeCurrentDate} />
     </Stack>
   );
