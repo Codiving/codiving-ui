@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { memo } from "react";
 import { Height, Width } from "../utils/common";
 import { shouldForwardProp } from "../utils/emotion";
+import Box from "./Box";
 
 interface StackItemProps extends React.ComponentProps<"div">, Width, Height {
   flex?: React.CSSProperties["flex"];
@@ -10,7 +11,7 @@ interface StackItemProps extends React.ComponentProps<"div">, Width, Height {
   background?: React.CSSProperties["background"];
 }
 
-const StackItem = styled("div", {
+const StackItem = styled(Box, {
   shouldForwardProp: shouldForwardProp(["flex"])
 })<StackItemProps>(
   ({
