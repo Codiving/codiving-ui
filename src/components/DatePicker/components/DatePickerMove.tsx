@@ -1,5 +1,6 @@
+import { AiOutlineCaretLeft, AiOutlineCaretRight } from "react-icons/ai";
 import { Stack, Typography } from "../../../ui";
-import Div from "../../../ui/Div";
+import IconButton from "../../../ui/IconButton";
 import DateObject from "../../../utils/DateObject/DateObject";
 import { MoveMode, MOVE_MODE, ViewMode } from "../types";
 
@@ -27,11 +28,17 @@ const DatePickerMove = (props: DatePickerMoveProps) => {
 
   return (
     <Stack spacing={2} padding={10}>
-      <Div onClick={onClickPrev}>왼</Div>
-      <Typography onClick={() => onClick(mode)}>
-        {MOVE_MODE.year ? dObject.format("YYYY") : dObject.format("MM")}
+      <IconButton onClick={onClickPrev} noMargin noPadding noRipple>
+        <AiOutlineCaretLeft width={20} height={20} />
+      </IconButton>
+      <Typography onClick={() => onClick(mode)} textAlign="center">
+        {MOVE_MODE.year === mode
+          ? dObject.format("YYYY")
+          : dObject.format("MM")}
       </Typography>
-      <Div onClick={onClickAfter}>오</Div>
+      <IconButton onClick={onClickAfter} noMargin noPadding noRipple>
+        <AiOutlineCaretRight width={20} height={20} />
+      </IconButton>
     </Stack>
   );
 };
