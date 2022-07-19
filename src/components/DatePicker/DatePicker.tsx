@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Stack } from "../../ui";
 import {
   DatePickerCalendarView,
@@ -13,11 +13,10 @@ import { MOVE_MODE, ViewMode, VIEW_MODE } from "./types";
 interface DatePickerProps {
   value?: Date;
   onChange?: (value: Date) => void;
-  onClose?: () => void;
 }
 
 const DatePicker = (props: DatePickerProps) => {
-  const { value = new Date(), onChange = () => {}, onClose = () => {} } = props;
+  const { value = new Date(), onChange = () => {} } = props;
 
   const [date, setDate] = useState(value);
   const [mode, setMode] = useState(VIEW_MODE.calendar);
@@ -27,6 +26,10 @@ const DatePicker = (props: DatePickerProps) => {
   const onChangeMode = (newMode: ViewMode) => setMode(newMode);
 
   const onChangeCurrentDate = () => setDate(new Date());
+
+  useEffect(() => {
+    setDate(value);
+  }, [value]);
 
   return (
     <Stack direction="column" b={"1px solid"}>
@@ -45,7 +48,9 @@ const DatePicker = (props: DatePickerProps) => {
           onClick={onChangeMode}
         />
       </Stack>
-      {mode === VIEW_MODE.calendar && <DatePickerCalendarView date={date} />}
+      {mode === VIEW_MODE.calendar && (
+        <DatePickerCalendarView date={date} onChange={onChange} />
+      )}
       {mode === VIEW_MODE.year && <DatePickerYearView />}
       {mode === VIEW_MODE.month && <DatePickerMonthView />}
       <GoToCurrentDate onClick={onChangeCurrentDate} />

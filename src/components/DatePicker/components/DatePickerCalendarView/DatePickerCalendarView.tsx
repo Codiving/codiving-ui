@@ -4,6 +4,7 @@ import WeekDateText from "./WeekDateText";
 
 interface DatePickerCalendarViewProps {
   date: Date;
+  onChange: (value: Date) => void;
 }
 
 const DatePickerCalendarView = (props: DatePickerCalendarViewProps) => {
