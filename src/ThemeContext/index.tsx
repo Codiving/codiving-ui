@@ -1,5 +1,9 @@
 import "@emotion/react";
-import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
+import {
+  css,
+  ThemeProvider as EmotionThemeProvider,
+  Global
+} from "@emotion/react";
 import { createContext, Dispatch, useContext, useReducer } from "react";
 import { LIGHT_THEME, type Mode, Theme } from "./theme";
 
@@ -25,7 +29,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeStateContext.Provider value={state}>
       <ThemeDispatchContext.Provider value={dispatch}>
-        <EmotionThemeProvider theme={state}>{children}</EmotionThemeProvider>
+        <EmotionThemeProvider theme={state}>
+          <Global
+            styles={css`
+              html {
+                font-size: ${state.typography.htmlFontSize}px;
+              }
+              body {
+                font-family: ${state.typography.fontFamily};
+              }
+            `}
+          />
+          {children}
+        </EmotionThemeProvider>
       </ThemeDispatchContext.Provider>
     </ThemeStateContext.Provider>
   );
