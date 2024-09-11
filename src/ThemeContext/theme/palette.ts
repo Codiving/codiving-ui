@@ -141,3 +141,5 @@ export const DARK_PALETTE: Palette = {
     disabled: "rgba(0,0,0,0.38)"
   }
 };
+
+export type TextColor = "textPrimary" | "textSecondary" | "textDisabled";
